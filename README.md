@@ -232,3 +232,29 @@ public class MainActivity extends Activity {
                        }
               });      
 ```
+如何做一个匀速旋转的轮子
+--
+首先写一个animation.xml的动画文件
+```xml
+<?xml version= "1.0" encoding ="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+    <rotate
+    android:fromDegrees= "0"   android:toDegrees ="360"   android:pivotX="50%"
+    android:pivotY= "50%"  android:duration ="4000"
+   
+    android:repeatCount= "infinite">
+   
+  </rotate >
+    </set >
+    
+```
+然后在activity中onCreate方法里面写入
+```java
+ImageView wheela=(ImageView)findViewById(R.id. imageView2);
+              ImageView wheelb=(ImageView)findViewById(R.id. imageView3);
+              Animation animation1=AnimationUtils.loadAnimation(this,R.anim.rotate);
+              LinearInterpolator lir = new LinearInterpolator();/*这两句保证匀速旋转,否则是先快后慢*/
+               animation1.setInterpolator(lir);
+              wheela.startAnimation( animation1);
+              wheelb.startAnimation( animation1);
+```
