@@ -427,7 +427,8 @@ public class MainActivity extends ActionBarActivity {
 		Thread thread=new Thread(new MyThread());
 		thread.start();
 	}
-}
+  }
+
 ```
 反编译
 --
