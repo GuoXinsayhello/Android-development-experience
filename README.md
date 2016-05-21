@@ -219,3 +219,16 @@ public class MainActivity extends Activity {
 <uses-permission android:name ="android.permission.INTERNET"/>
 ```
 先运行java程序，再运行android程序即可。
+在fragment如何实现跳转
+--
+在oncreateview里面写上即可
+```java
+  myImage12.setOnClickListener( new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                             Intent in= new Intent(getActivity(),JumpActivity1.class );
+                             startActivity(in);
+                           
+                       }
+              });      
+```
