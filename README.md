@@ -435,3 +435,72 @@ public boolean onTouchEvent(MotionEvent even)
 	return super.onTouchEvent(even);
 	}
 ```
+关于Jason
+--
+ 首先，当总是出现错误的时候不要立刻换代码，尝试看logcat，看看问题出在什么地方，logcat前面会描述问题的现象，后面会有caused by：XXX一定要看清楚，根据问题修改代码。
+ http请求不允许在主线程中，如果出现一般会有
+Android之NetworkOnMainThreadException异常
+因此要向服务器请求http的时候一定要另外开启一个线程，如果要修改UI还要用到Handler与主线程进行通信。
+        第三，在进行网络有关的项目时一定要记得在manifext.xml中开启网络权限。
+        第四，json是一种数据格式，有jsonObject与jsonArray两种，前者是对象，用{}包括，后者是数组，用[]表示，数组之中可以包含对象，json格式是key/value对，key与value之间用冒号分隔
+一个可用的向服务器请求json的的代码如下：
+```JAVA
+Public void onClick(View v)
+{
+new Thread(networkTask).start();
+}
+Runnable networkTask = new Runnable() {  
+		  
+	    @Override  
+	    public void run() {  
+	        // TODO  
+	        // 在这里进行 http request.网络请求相关操作  
+	    	String strUrl = "http://mbc.nimache.com/mbc/md5";  
+	         String strResult = connServerForResult(strUrl);   
+	         //获得多个Singer   
+	         parseJson(strResult);   
+	        /*Message msg = new Message();  
+	        handler.sendMessage(msg);  */
+	    }  
+	}; 
+	 private String connServerForResult(String strUrl) {   
+	        // HttpGet对象   
+	        HttpGet httpRequest = new HttpGet(strUrl);   
+	        String strResult = "";   
+	        try {   
+	            // HttpClient对象   
+	            HttpClient httpClient = new DefaultHttpClient();   
+	            // 获得HttpResponse对象   
+	            HttpResponse httpResponse = httpClient.execute(httpRequest);   
+	            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {   
+	                // 取得返回的数据   
+	                strResult = EntityUtils.toString(httpResponse.getEntity());   
+	            }   
+	        } catch (ClientProtocolException e) {   
+	          /*  tx.setText("protocol error");   */
+	        	System.out.println("fuck_protocal_error");
+	            e.printStackTrace();   
+	        } catch (IOException e) {   
+	            /*tx.setText("IO error"); */ 
+	            System.out.println("fuck_IO_error");
+	            e.printStackTrace();   
+	        }   
+	        return strResult;   
+	    }   
+	    // 普通Json数据解析   
+	    private void parseJson(String strResult) {   
+	        try {   
+	            JSONObject jsonObj = new JSONObject(strResult);   
+	           /* int id = jsonObj.getInt("id");  */ 
+	            String name = jsonObj.getString("a");   
+	            String gender = jsonObj.getString("b");   
+	           /* tx.setText("ID号"+name + ", 姓名：" + name + ",性别：" + gender);   */
+	           Log.i("fuck","a"+name+"/n"+"b"+gender);
+	        } catch (JSONException e) {   
+	            System.out.println("Json parse error");   
+	            e.printStackTrace();   
+	        }   
+	    }  
+```
+输入回车的方法是"\n",而不是"/n"
+  Message-Digest泛指字节串(Message)的Hash变换，就是把一个任意长度的字节串变换成一定长的大整数。注意这里说的是“字节串”而不是“字符串”，因为这种变换只与字节的值有关，与字符集或编码方式无关。
