@@ -258,3 +258,75 @@ ImageView wheela=(ImageView)findViewById(R.id. imageView2);
               wheela.startAnimation( animation1);
               wheelb.startAnimation( animation1);
 ```
+如何实现基于UDP的socket的通信
+--
+```java
+private static final String ServerIP = "192.168.173.1" ;
+        private static final int ServerPort = 4568;
+在按钮点击事件中写入new Thread( new Server()).start(); 
+                                       try { 
+                                      Thread.sleep(500); 
+                                  } catch (InterruptedException e) { 
+                                  
+                                         } 
+                                         new Thread( new Client()).start(); 
+其中client和server的类定义如下：
+public class Client implements Runnable { 
+                     @Override 
+                     public void run() { 
+                          /*while (start == false) { 
+                         }  */
+                   try { 
+                              Thread.sleep(500); 
+                          } catch (InterruptedException e1) { 
+                             // TODO Auto-generated catch block 
+                             e1.printStackTrace(); 
+                         } 
+                         try { 
+                             InetAddress serverAddr = InetAddress.getByName(ServerIP ); 
+                           /*  updatetrack ("Client: Start connecting\n");  */
+                             DatagramSocket socket = new DatagramSocket(); 
+                             byte[] buf;
+                                 buf = ( "abc").getBytes(); 
+                            DatagramPacket packet = new DatagramPacket(buf, buf.length, 
+                                     serverAddr, ServerPort); 
+                            /* updatetrack ("Client: Sending ‘" + new String(buf ) + "’\n");  */
+                              socket.send(packet); 
+                            /* updatetrack ("Client: Message sent\n"); 
+                              updatetrack("Client: Succeed!\n"); */
+                          } catch (Exception e) { 
+                             /* updatetrack ("Client: Error!\n");  */
+                          } 
+                      } 
+                  } 
+                 public class Server implements Runnable { 
+                     @Override 
+              public void run() { 
+                         /*while (start == false) { 
+                        }  */
+                        try { 
+                            InetAddress serverAddr = InetAddress.getByName(ServerIP ); 
+                             /*updatetrack ("\nServer: Start connecting\n");  */
+                             DatagramSocket socket = new DatagramSocket(ServerPort , 
+                                     serverAddr); 
+                            byte[] buf = new byte[17]; 
+                           DatagramPacket packet = new DatagramPacket(buf, buf.length); 
+                           /* updatetrack ("Server: Receiving\n");  */
+                              socket.receive(packet); 
+                            /* updatetrack ("Server: Message received: ‘" 
+                                      + new String(packet.getData()) + "’\n"); 
+                             updatetrack("Server: Succeed!\n");  */
+                         } catch (Exception e) { 
+                           /* updatetrack ("Server: Error!\n");  */
+                         } 
+                    } 
+                } 
+```
+注意这里client是发送的，server是接收的
+activity如何返回数据
+--
+例如：在Activity A中打开一个Activity B,如果要在Activity B关闭的时候给Activity A传一些数据,
+*  1,Activity A就需要用自己特有的startActivityForResult() 的方法打开Activity B ,
+*  2,Activity A中需要重写onActivityResult(int requestCode, int resultCode, Intent data)的方法来接受Activity B传回来的数据，
+*  3,在Activity B中用setResult(int resultCode,Intent data)的方法为Activity A设置返回的数据
+http://blog.csdn.net/yujian_bing/article/details/8476276
