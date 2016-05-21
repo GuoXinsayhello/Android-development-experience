@@ -389,3 +389,49 @@ public class MainActivity extends ActionBarActivity {
 	}
 }
 ```
+反编译
+--
+如何反编译一个安卓apk，从apk中得到资源文件以及java代码http://blog.csdn.net/vipzjyno1/article/details/21039349/
+如何对自己的apk进行混淆处理，就是即使别人反编译之后得到的代码也很难懂，让proguard.cfg起作用的做法很简单，就是在eclipse自动生成的default.properties文件中加上一句“proguard.config=proguard.cfg”就可以了。proguard是一个Java代码的混淆工具
+
+在不同activity之间传递数据
+--
+有四种方法
+* i）：通过intent    
+发送数据的MainActivity:
+Intent intent=new Intent(this,receActivity.class);
+Intent.putExtra("int_data",123);
+startActivity(intent);
+
+接收数据的receActivity:
+StringBuilder bid=new StringBulider();
+int b=getIntent().getExtras().getInt("int_data");
+String str=bid.append(b).toString();
+
+* ii):通过静态（static）变量    
+首先在接收数据的receactivity定义静态变量
+Public static String str；
+textView.setText(str);
+然后在发送数据的activity中：
+receactivity.str="jdkj";
+Intent intent=new Intent(this,receactivity.class);
+startActivity(intent）;
+
+*  iii）：剪贴板（clipboard）传递数据
+*  iv）：全局对象传递数据
+首先新建类MyApp.class，继承自Application  其中有个属性         public String country    ；，然后在manifest.xml中的<Application>标签中写入android：name=".MyApp",然后在发送的transctivity 中写入MyApp app=（MyApp）getApplicationContext();    app.country="fff",    在receActivity中也写入
+MyApp app=（MyApp）getApplicationContext();   tx.setText(app.country);
+
+通过触摸输出触摸点坐标
+--
+```java
+public boolean onTouchEvent(MotionEvent even)
+	{
+		
+	if(even.getAction()==MotionEvent.ACTION_DOWN)
+	  {
+		Log.v("X的坐标", "zuobioa"+even.getX());
+	  }
+	return super.onTouchEvent(even);
+	}
+```
