@@ -111,3 +111,111 @@ public void auto(View arg0)
 ```xml
 android:inputType="textPassword"
 ```
+如何切换首先出现的activity？
+--
+将下面这段代码剪切再粘贴到想要目标activity的</activity>之上即可
+```xml
+<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+```
+如果这段代码在不同的activity中都存在，那么当安装程序的时候会安装多个应用
+如何做一个封面（splash）
+--
+新建一个splashactivity，将acvtivity.java中没用的都注释掉,将其改成
+```java
+public class SplashActivity extends ActionBarActivity {
+     //新加的
+     private final int SPLASH_DISPLAY_LENGHT=2000;
+
+     @Override
+     protected void onCreate(Bundle savedInstanceState)
+{
+          super.onCreate(savedInstanceState)；
+          requestWindowFeature(Window.FEATURE_NO_TITLE);//1
+              setContentView(R.layout. activity_splash);//2
+              getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );            //3
+          new Handler().postDelayed(new Runnable()
+          {
+               @Override
+               public void run()
+               {
+                    Intent mainIntent = new Intent(SplashActivity.this,MainActivity.class);
+                   
+                    SplashActivity.this.startActivity(mainIntent);
+                    SplashActivity.this.finish();
+               }
+          },SPLASH_DISPLAY_LENGHT);
+}
+}
+```
+其中2000表示2秒（不过实际中没有用，至少10000才有用）。然后在manifest.html将程序刚开始的入口设为splashactivity
+注意2句要位于1之后，否则会报错。  然后在layout中的activity_splash.xml中设置背景图片。
+思想就是先进入一个全屏activity，延迟几秒后进入下一个activity
+如何在电脑建立服务器端，手机作为客户端，手机端接收电脑发送的数据
+--
+  1.在ADT建立一个JAVA工程，然后输入以下代码
+  ```java
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+public class SocketTest {
+   public static void main(String args[])
+   throws IOException
+   {
+          ServerSocket ss=new ServerSocket(30001);
+          while(true )
+          {
+                Socket s=ss.accept();
+                OutputStream os=s.getOutputStream();
+                os.write( "Iwanttomarry\n".getBytes("utf-8" ));
+                os.close();
+                s.close();
+          }
+         
+   }
+
+}
+```
+然后建立安卓工程，输入以下代码：
+```java
+public class MainActivity extends Activity {
+       EditText show;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+               super.onCreate(savedInstanceState);
+              setContentView(R.layout. activity_main);
+               show=(EditText)findViewById(R.id. show);
+               new Thread()
+              {
+                      public void run()
+                     {
+                            try{
+                           /*注意这里的IP是电脑私有地址*/
+                                  Socket socket= new Socket("192.168.1.104" ,30001);
+                                  BufferedReader br= new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                                  String line=br.readLine();
+                                   show.setText( "来自服务器的数据：" +line);
+                                  br.close();
+                                  socket.close();
+                           }
+                      catch (IOException e)
+                           {
+                                  e.printStackTrace();//这句话表示
+在命令行打印异常信息在程序中出错的位置及原因
+                           }
+                     }
+                     
+              }.start();
+              
+                  }
+}
+```
+然后在activity的layout里面放置一个edittext，
+然后在manifest中设置入网权限，
+```xml
+<uses-permission android:name ="android.permission.INTERNET"/>
+```
+先运行java程序，再运行android程序即可。
