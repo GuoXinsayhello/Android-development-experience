@@ -545,3 +545,50 @@ Runnable networkTask = new Runnable() {
 ```
 输入回车的方法是"\n",而不是"/n"
   Message-Digest泛指字节串(Message)的Hash变换，就是把一个任意长度的字节串变换成一定长的大整数。注意这里说的是“字节串”而不是“字符串”，因为这种变换只与字节的值有关，与字符集或编码方式无关。
+
+fileinputstream()函数
+--
+public int read(byte[] b) throws IOException
+*  功能：从此输入流中将最多b.length个字节的数据读入一个字节数组中。在某些输入可用前，此方法将阻塞
+*  覆盖：类 InputStream 中的 read
+* 参数：b - 存储读取数据的缓冲区
+* 返回：读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+*  抛出：IOException - 如果发生 I/O 错误。
+
+来自 <http://blog.csdn.net/lzt623459815/article/details/8477658> 
+
+如果要想读取两个文件，然后对这两个文件进行异或操作，可以利用fileinputstream函数中的read（byte【】 b）方法，字节会存在b中，然后对b进行异或运算
+
+spinner的用法
+--
+1.         //根据id获取对象  
+2.         spinner=(Spinner) findViewById(R.id.spinner1);  
+3.         //显示的数组  
+4.         final String arr[]=new String[]{  
+5.                 "星期一",  
+6.                 "星期二",  
+7.                 "星期三",  
+8.                 "星期四",  
+9.                 "星期五",  
+10.                 "星期六",  
+11.                 "星期日"     
+12.         };  
+13.           
+14.         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr); 
+15.  spinner.setAdapter(arrayAdapter);  
+16.             //注册事件  
+17.         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  
+18.   
+19.             @Override  
+20.             public void onItemSelected(AdapterView<?> parent, View view,  
+21.                     int position, long id) {  
+22.                 Spinner spinner=(Spinner) parent;  
+23.                 Toast.makeText(getApplicationContext(), "xxxx"+spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();  
+24.             }  
+25.   
+26.             @Override  
+27.             public void onNothingSelected(AdapterView<?> parent) {  
+28.                 Toast.makeText(getApplicationContext(), "没有改变的处理", Toast.LENGTH_LONG).show();  
+29.             }  
+30.   
+31.         });  
