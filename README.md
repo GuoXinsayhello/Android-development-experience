@@ -478,11 +478,11 @@ Runnable networkTask = new Runnable() {
 	            }   
 	        } catch (ClientProtocolException e) {   
 	          /*  tx.setText("protocol error");   */
-	        	System.out.println("fuck_protocal_error");
+	        	System.out.println("protocal_error");
 	            e.printStackTrace();   
 	        } catch (IOException e) {   
 	            /*tx.setText("IO error"); */ 
-	            System.out.println("fuck_IO_error");
+	            System.out.println("IO_error");
 	            e.printStackTrace();   
 	        }   
 	        return strResult;   
