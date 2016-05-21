@@ -326,7 +326,47 @@ public class Client implements Runnable { 
 activity如何返回数据
 --
 例如：在Activity A中打开一个Activity B,如果要在Activity B关闭的时候给Activity A传一些数据,
-*  1,Activity A就需要用自己特有的startActivityForResult() 的方法打开Activity B ,
+*  1,Activity A就需要用自己特有的startActivityForResult() 的方法打开Activity B 
+    比如：两个activity，比如一个信息登记总界面，点击录入个人信息按钮，就会跳到编辑activity，然后输入完个人信息之后就再跳回去。
+	首先在主界面输入
+```java
+	 public void onClick(View v)
+	    {
+	    	Intent intent=new Intent(this,TestfirstActivity.class);
+	    	startActivityForResult(intent,1);
+	   	
+	    }
+	    
+		protected void onActivityResult(int requestCode,int resultCode,Intent data1 )
+		{
+			super.onActivityResult( requestCode, resultCode,  data1 );
+			switch(requestCode)
+			{
+			case 1:
+				switch(resultCode)
+				{
+			          case 2: setTitle(data1.getStringExtra("fuck"));
+			          
+			          break;
+			    }
+				
+			 break;
+			 
+			}
+			
+		}
+		```
+	然后在信息输入界面输入：
+```java
+	public void onClick(View v)
+		{
+			String sb=etx.getText().toString();
+			Intent intent=new Intent();
+			intent.putExtra("fuck",sb);
+			setResult(2,intent);
+		    finish();
+		}
+```
 *  2,Activity A中需要重写onActivityResult(int requestCode, int resultCode, Intent data)的方法来接受Activity B传回来的数据，
 *  3,在Activity B中用setResult(int resultCode,Intent data)的方法为Activity A设置返回的数据
 http://blog.csdn.net/yujian_bing/article/details/8476276
