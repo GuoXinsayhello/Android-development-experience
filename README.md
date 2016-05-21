@@ -330,3 +330,62 @@ activity如何返回数据
 *  2,Activity A中需要重写onActivityResult(int requestCode, int resultCode, Intent data)的方法来接受Activity B传回来的数据，
 *  3,在Activity B中用setResult(int resultCode,Intent data)的方法为Activity A设置返回的数据
 http://blog.csdn.net/yujian_bing/article/details/8476276
+
+如何搜索手机内存卡内的文件
+--
+```java
+public String searchfile(String keyword)
+{
+       File[] files = new File("/storage/sdcard0/" ).listFiles();
+        for (File file : files)
+       {
+               if(file.getName().indexOf(keyword) >= 0)
+//indexOf方法返回 String 对象内第一次出现子字符串的字符位置
+              {
+                     Toast. makeText(getApplicationContext(), "yes, wehave",Toast.LENGTH_LONG).show();
+              }
+              
+       }
+        return keyword;
+}
+```
+只需要把文件名传递到函数的参数中即可
+关于线程
+--
+如果没有新开线程，仅仅是静态改变控件的属性，不用handler也可以，然而如果新开了一个线程，要想在新线程中改变控件，就要用到handler
+具体代码如下（实现点击按钮，开启一个新的线程thread，然后在新线程中改变textview的内容：
+```java
+public class MainActivity extends ActionBarActivity {
+	private TextView tx;
+	private Button btn;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		tx=(TextView)findViewById(R.id.textView1);
+		btn=(Button)findViewById(R.id.button1);
+	}
+	Handler handler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			String str=String.valueOf(msg.obj);
+			tx.setText(str);
+		}
+	};
+	public class MyThread implements Runnable
+	{
+		public void run()
+		{
+			Message msg=new Message();
+		    msg.obj="sds";
+			handler.sendMessage(msg);
+		}
+	}
+	public void onClick(View view)
+	{
+		Thread thread=new Thread(new MyThread());
+		thread.start();
+	}
+}
+```
