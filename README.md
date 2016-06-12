@@ -592,3 +592,12 @@ spinner的用法
 29.             }  
 30.   
 31.         });  
+#疯狂Android讲义
+##第5章 使用Intent和IntentFilter进行通信
+###5.2
+指定Component属性的Intent为显式intent，没有指定Component属性的Intent为隐式Intent。一个Intent对象最多只能包括一个Action属性，但是一个Intent对象可以包括多个Category属性。可以用intent实现点击一个自定义按钮返回home桌面，
+```java
+Intent intent=new Intent();
+intent.setAction(Intent.ACTION_MAIN);
+intent.addCategory(Intent.CATEGORY_HOME);
+```
