@@ -602,3 +602,11 @@ Intent intent=new Intent();
 intent.setAction(Intent.ACTION_MAIN);
 intent.addCategory(Intent.CATEGORY_HOME);
 ```
+intent中data属性与type属性会相互覆盖，设置的后一个属性会把前一个属性覆盖，除非使用setDataAndType()方法。Uri字符串总是满足如下格式scheme://host:port/path.Intent的extra属性用于在多个action之间进行数据交换，是一个bundle对象。Flag属性用于为该Intent添加一些额外的控制旗标，比如Intent.FLAG_ACTIVITY_CLEAR_TOP用于清除当前activity栈中的activity
+##第6章 Android应用的资源
+无法通过R资源清单类访问的原生资源保存在assets目录下，可以使用AssetManager来访问这些资源。<br>
+可以使用#RGB来使用颜色资源，也可以使用#RRGGBB来使用颜色资源。dimens.xml定义尺寸值资源，比如
+```xml
+<dimen name="cell_width">60dp</dimen>
+```
+
