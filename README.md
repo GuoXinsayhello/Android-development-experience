@@ -609,4 +609,4 @@ intent中data属性与type属性会相互覆盖，设置的后一个属性会把
 ```xml
 <dimen name="cell_width">60dp</dimen>
 ```
-
+2016/6/13 看到298页
