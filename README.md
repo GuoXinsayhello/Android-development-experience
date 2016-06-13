@@ -592,6 +592,7 @@ spinner的用法
 29.             }  
 30.   
 31.         });  
+
 #疯狂Android讲义
 ##第5章 使用Intent和IntentFilter进行通信
 ###5.2
