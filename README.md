@@ -610,3 +610,7 @@ intent中data属性与type属性会相互覆盖，设置的后一个属性会把
 <dimen name="cell_width">60dp</dimen>
 ```
 2016/6/13 看到298页
+StateListDrawable可用于组织多个Drawable对象，并且其对象会随着目标组件状态的改变而自动切换。<br>
+LayerDrawable也可以包含一个Drawable数组，系统会按照这些Drawable对象的顺序来绘制<br>
+ShapeDrawable用于定义一个基本的几何图形（如矩形，圆形，线条等）
+2016/6/21 看到310页
