@@ -612,5 +612,34 @@ intent中data属性与type属性会相互覆盖，设置的后一个属性会把
 2016/6/13 看到298页
 StateListDrawable可用于组织多个Drawable对象，并且其对象会随着目标组件状态的改变而自动切换。<br>
 LayerDrawable也可以包含一个Drawable数组，系统会按照这些Drawable对象的顺序来绘制<br>
-ShapeDrawable用于定义一个基本的几何图形（如矩形，圆形，线条等）
-2016/6/21 看到310页
+ShapeDrawable用于定义一个基本的几何图形（如矩形，圆形，线条等）<br>
+2016/6/21 看到310页<br>
+主题（theme）与样式（Style）的区别在于主题不能作用于单个的view组件，主题应该对整个应用中的所有Activity起作用，或对指定的Activity起作用。主题与样式都可以继承，通过parent来设置<br>
+如果要获取Java支持的国家和语言，可以调用Locale类的getAvailableLocales方法获取
+##第7章 图形与图象处理
+###7.1
+```java
+//把一个Bitmap对象包装成BitmapDrawable对象
+BitmapDrawable drawable=new BitmapDrawable(bitmap);
+```
+BitmapFactory是一个工具类，有很多方法，用于从不同的数据源来解析、创建Bitmap对象。recycle()强制一个Bitmap对象立即回收自己。<br>
+`如何在Android绘图`<br>
+```java
+public class MyView extends View
+{
+ public MyView(Context context,AttributeSet set)
+ {
+   super(context,set);
+ }
+procted void onDraw(Canvas canvas)
+{
+ super.onDraw(canvas);
+ Paint paint =new Paint();
+ ...
+
+}
+}
+```
+2016/6/22 看到342页
+
+
