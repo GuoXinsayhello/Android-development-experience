@@ -641,5 +641,13 @@ procted void onDraw(Canvas canvas)
 }
 ```
 2016/6/22 看到342页
-
+```java
+ public EmbossMaskFilter(float[] direction, float ambient, float specular, float blurRadius) {
+        if (direction.length < 3) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+```
+这个类能够让目标出现浮雕效果，direction 是float数组，定义长度为3的数组标量[x,y,z]，来指定光源的方向，ambient 取值在0到1之间，定义背景光 或者说是周围光，specular 定义镜面反射系数，blurRadius 模糊半径。<br>
+而BlurMaskFilter能够使目标出现模糊效果，使用它后会出现一个面具在目标的边缘的指定范围，该面具的边缘是否会被包进目标中，或者是在目标里边，外边，里边都有，这是由BlurMaskFilter.Blur这个枚举所决定的。
+###7.3图形特效处理
 
