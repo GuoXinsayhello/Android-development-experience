@@ -665,4 +665,12 @@ shader本身是一个抽象类，可以控制渲染效果，它的几个实现�
 2016/6/26 看到388页
 ##第8章 Android数据存储与IO
 ###SharedPreference
-SharedPreference用于对少量的数据进行保存，保存的数据类型主要是简单地Key-Value对。Environment.getExternalStorageDirectory()用来获取外部存储器，也就是SD卡的目录。
+SharedPreference用于对少量的数据进行保存，保存的数据类型主要是简单地Key-Value对。Environment.getExternalStorageDirectory()用来获取外部存储器，也就是SD卡的目录。BufferedReader从字符输入流中读取文本并将字符存入缓冲区以便能提供字符、数组和线段的高效读取。可指定缓冲区尺寸或使用缺省尺寸。该缺省尺寸对大多数用途来说是足够的。
+```java
+BufferedReader br=new BufferedReader(new InputStreamFReader(fis));//fis为FileInputStream 流
+```
+如果用FileOutputStream向指定文件写入数据，会把原有的文件内容清空，如果要追加文件内容，可以使用RandomAccessFile 
+###8.3 SQLite数据库
+JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组
+用Java语言编写的类和接口组成。
+2016/6/26 看到404页
