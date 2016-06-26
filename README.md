@@ -650,4 +650,9 @@ procted void onDraw(Canvas canvas)
 这个类能够让目标出现浮雕效果，direction 是float数组，定义长度为3的数组标量[x,y,z]，来指定光源的方向，ambient 取值在0到1之间，定义背景光 或者说是周围光，specular 定义镜面反射系数，blurRadius 模糊半径。<br>
 而BlurMaskFilter能够使目标出现模糊效果，使用它后会出现一个面具在目标的边缘的指定范围，该面具的边缘是否会被包进目标中，或者是在目标里边，外边，里边都有，这是由BlurMaskFilter.Blur这个枚举所决定的。
 ###7.3图形特效处理
-可以使用，matrix进行图形变换，首先获取matrix对象，然后调用matrix的方法进行平移2，旋转，缩放，倾斜等，将程序对matrix所做的变换应用到指定图形或者组件。
+可以使用，`matrix`进行图形变换，首先获取matrix对象，然后调用matrix的方法进行平移2，旋转，缩放，倾斜等，将程序对matrix所做的变换应用到指定图形或者组件。<br>
+Android提供了`Invalidate`方法实现界面刷新，但是Invalidate不能直接在线程中调用，因为他是违背了单线程模型：Android UI操作并不是线程安全的，并且这些操作必须在UI线程中调用。invalidate()是用来刷新View的，必须是在UI线程中进行工作。比如在修改某个view的显示时，调用invalidate()才能看到重新绘制的界面。invalidate()的调用是把之前的旧的view从主UI线程队列中pop掉。 一个Android 程序默认情况下也只有一个进程，但一个进程下却可以有许多个线程。在这么多线程当中，把主要是负责控制UI界面的显示、更新和控件交互的线程称为UI线程，由于onCreate()方法是由UI线程执行的，所以也可以把UI线程理解为主线程。其余的线程可以理解为工作者线程。invalidate()得在UI线程中被调动，在工作者线程中可以通过Handler来通知UI线程进行界面更新。而`postInvalidate()`在工作者线程中被调用<br>
+可以使用drawBitmapMesh对图像进行扭曲，可以出现水波荡漾，风吹旗帜等效果<br>
+Java从右向左的赋值运算就是当出现a=b=c这样的连续赋值时，相当于(a=(b=c)),即相当于b=c,a=b<br>
+shader本身是一个抽象类，可以控制渲染效果，它的几个实现类：BitmapShader产生位图平铺，LinearGradient使用线性渐变，RadialGradient使用圆形渐变，SweepGradient使用角度渐变，ComposeShader使用组合渲染<br>
+逐帧动画，补间动画（Tween）,其中自定义的补间动画可以让图片在三维空间中进行旋转
