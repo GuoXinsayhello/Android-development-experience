@@ -662,3 +662,7 @@ shader本身是一个抽象类，可以控制渲染效果，它的几个实现�
 3.如果需要监听就为Animator对象设置事件监听器<br>
 4.如果要有多个动画，用AnimatorSet组合这些动画<br>
 5.调用Animator对象的start()方法启动动画。
+2016/6/26 看到388页
+##第8章 Android数据存储与IO
+###SharedPreference
+SharedPreference用于对少量的数据进行保存，保存的数据类型主要是简单地Key-Value对。Environment.getExternalStorageDirectory()用来获取外部存储器，也就是SD卡的目录。
