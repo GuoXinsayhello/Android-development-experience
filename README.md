@@ -655,4 +655,10 @@ Android提供了`Invalidate`方法实现界面刷新，但是Invalidate不能直
 可以使用drawBitmapMesh对图像进行扭曲，可以出现水波荡漾，风吹旗帜等效果<br>
 Java从右向左的赋值运算就是当出现a=b=c这样的连续赋值时，相当于(a=(b=c)),即相当于b=c,a=b<br>
 shader本身是一个抽象类，可以控制渲染效果，它的几个实现类：BitmapShader产生位图平铺，LinearGradient使用线性渐变，RadialGradient使用圆形渐变，SweepGradient使用角度渐变，ComposeShader使用组合渲染<br>
-逐帧动画，补间动画（Tween）,其中自定义的补间动画可以让图片在三维空间中进行旋转
+逐帧动画，补间动画（Tween）,其中自定义的补间动画可以让图片在三维空间中进行旋转。属性动画比补间动画的功能更加强大，首先补间动画只能定义帧在透明度、旋转、缩放、位移四个方面的变化，但是属性动画可以定义任何属性的变化。补间动画只能对UI组件执行动画，但是属性动画几乎可以对任何对象执行动画。ValueAnimator是属性动画主要的时间引擎，负责计算各个帧的属性值，是Animator的子类；ObjectAnimator是ValueAnimator的子类，使用起来更加简单，更常用。<br>
+使用属性动画的步骤如下：<br>
+1.创建ValueAnimator或者ObjectAnimator对象<br>
+2.根据需要为Animator对象设置属性<br>
+3.如果需要监听就为Animator对象设置事件监听器<br>
+4.如果要有多个动画，用AnimatorSet组合这些动画<br>
+5.调用Animator对象的start()方法启动动画。
