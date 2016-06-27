@@ -680,4 +680,6 @@ DML：数据操纵语言，关键字：Insert、delete、update<br>
 DCL：数据库控制语言 ，关键字：grant、remove<br>
 DQL：数据库查询语言，关键字：select<br>
 可以通过Android SDK中platform-tools目录下的sqlite3.exe工具来查询、管理数据库。当然也可以通过Android提供的insert，update，delete，query等方法来操作数据库。<br>
-在实际项目中一般很少用SQLiteDatabase的方法来打开数据库，通常会继承SQLiteOpenHelper来开发子类，
+在实际项目中一般很少用SQLiteDatabase的方法来打开数据库，通常会继承SQLiteOpenHelper来开发子类。<br>
+可以使用GestureDetector类来检测手势，其中有个onFling函数可以用来检测滑动的速度以及最终停下来的位置。GestureOverlayView可以自定义编辑手势
+2016/6/27 看到235页
