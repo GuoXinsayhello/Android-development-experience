@@ -674,3 +674,10 @@ BufferedReader br=new BufferedReader(new InputStreamFReader(fis));//fis为FileIn
 JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组
 用Java语言编写的类和接口组成。
 2016/6/26 看到404页
+`Cursor` 是每行的集合，使用 moveToFirst() 定位第一行。<br>
+DDL：数据库模式定义语言，关键字：create<br>
+DML：数据操纵语言，关键字：Insert、delete、update<br>
+DCL：数据库控制语言 ，关键字：grant、remove<br>
+DQL：数据库查询语言，关键字：select<br>
+可以通过Android SDK中platform-tools目录下的sqlite3.exe工具来查询、管理数据库。当然也可以通过Android提供的insert，update，delete，query等方法来操作数据库。<br>
+在实际项目中一般很少用SQLiteDatabase的方法来打开数据库，通常会继承SQLiteOpenHelper来开发子类，
