@@ -683,3 +683,7 @@ DQL：数据库查询语言，关键字：select<br>
 在实际项目中一般很少用SQLiteDatabase的方法来打开数据库，通常会继承SQLiteOpenHelper来开发子类。<br>
 可以使用GestureDetector类来检测手势，其中有个onFling函数可以用来检测滑动的速度以及最终停下来的位置。GestureOverlayView可以自定义编辑手势
 2016/6/27 看到235页
+##第9章 使用contentprovider实现数据共享
+应用程序通过contentprovider暴露自己的接口，其他应用程序可以通过该接口来操作该应用程序的内部数据。ContentProvider相当于一个网站，作用是暴露数据，ContentResolver相当于HttpClient<br>
+将字符串转化成uri，uri工具类提供了parse()静态方法，Uri uri= Uri.parse("XXX")<br>
+编写完contentprovider的类之后，只要在<application/>元素添加<provider>子元素即可配置contentprovider。contentprovider只存在onCreate()一个生命周期
