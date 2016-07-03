@@ -697,4 +697,6 @@ Service组件创建时会调用onCreate()方法，被启动时会调用onStartCo
 IBinder onBind(Intent intent)是service必须实现的方法，该方法返回一个IBinder，应用程序可以通过该组件与service组件通信<br>
 boolean onUnbind(Intent intent)当该Service上绑定的所有客户端都断开连接时将会回调该方法。<br>
 运行service有两种方法：通过context的startService()方法，访问者与service没有关联，即使访问者退出了，service继续运行。<br>
-通过context的bindService()方法，访问者与service绑定在一起，访问者一旦退出，service也就终止
+通过context的bindService()方法，访问者与service绑定在一起，访问者一旦退出，service也就终止。<br>
+如果service需要和访问者之间进行方法调用或者交换数据，应该使用bindService()和unbindService()
+2016/7/3日看到462页
