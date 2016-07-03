@@ -686,4 +686,15 @@ DQL：数据库查询语言，关键字：select<br>
 ##第9章 使用contentprovider实现数据共享
 应用程序通过contentprovider暴露自己的接口，其他应用程序可以通过该接口来操作该应用程序的内部数据。ContentProvider相当于一个网站，作用是暴露数据，ContentResolver相当于HttpClient<br>
 将字符串转化成uri，uri工具类提供了parse()静态方法，Uri uri= Uri.parse("XXX")<br>
-编写完contentprovider的类之后，只要在<application/>元素添加<provider>子元素即可配置contentprovider。contentprovider只存在onCreate()一个生命周期
+编写完contentprovider的类之后，只要在<application/>元素添加<provider>子元素即可配置contentprovider。contentprovider只存在onCreate()一个生命周期。<br>
+Android系统提供了很多ContentProvider，比如联系人，比如多媒体内容（camera）。
+###9.4 监听contentprovider的数据改变
+如果应用程序需要监听contentprovider所共享数据的变化，并且能够通过数据改变而提供响应，这就需要用contentobserver
+##第10章 service与broadcastreceiver
+BroadcastReceiver组件像一个全局的事件监听器，用于监听系统发出的Broadcast<br>
+###Service
+Service组件创建时会调用onCreate()方法，被启动时会调用onStartCommand方法，被关闭前调用onDestroy方法
+IBinder onBind(Intent intent)是service必须实现的方法，该方法返回一个IBinder，应用程序可以通过该组件与service组件通信<br>
+boolean onUnbind(Intent intent)当该Service上绑定的所有客户端都断开连接时将会回调该方法。<br>
+运行service有两种方法：通过context的startService()方法，访问者与service没有关联，即使访问者退出了，service继续运行。<br>
+通过context的bindService()方法，访问者与service绑定在一起，访问者一旦退出，service也就终止
