@@ -691,7 +691,8 @@ Android系统提供了很多ContentProvider，比如联系人，比如多媒体�
 ###9.4 监听contentprovider的数据改变
 如果应用程序需要监听contentprovider所共享数据的变化，并且能够通过数据改变而提供响应，这就需要用contentobserver
 ##第10章 service与broadcastreceiver
-BroadcastReceiver组件像一个全局的事件监听器，用于监听系统发出的Broadcast<br>
+BroadcastReceiver组件像一个全局的事件监听器，用于监听系统发出的Broadcast，OnXXXListener在程序退出时就随之关闭，但是Broadcastreceiver
+不会<br>
 ###Service
 Service组件创建时会调用onCreate()方法，被启动时会调用onStartCommand方法，被关闭前调用onDestroy方法
 IBinder onBind(Intent intent)是service必须实现的方法，该方法返回一个IBinder，应用程序可以通过该组件与service组件通信<br>
@@ -705,4 +706,9 @@ Service的生命周期，非绑定service的生命周期，也就是通过starts
 被绑定Service的生命周期，onCreate(),onBind(),onUnbind(),onDestroy()
 ####IntentService
 Service与它所在的应用处于同一个进程当中，Service不是一个新的线程，因此不应该在Service中直接处理耗时的任务。如果需要在Service中处理耗时的任务，建议在Service中另外开启一条新线程来处理耗时任务。也可以使用IntentService来实现。<br>
-IntentService会创建单独的worker线程来处理所有的Intent请求。
+IntentService会创建单独的worker线程来处理所有的Intent请求。只需要重写onHandleIntent()方法就可以，并不需要实现onBind()与onStartCommand(）方法<br>
+AlarmManager不仅可以定闹钟，而且可以用来定时更换壁纸之类的
+###BroadcastReceiver
+BroadcastReceiver用于接收程序发出的Broadcast Intent，如果其onReceive()方法没有在10s内执行完成，Android程序会认为该程序没有响应。发出Broadcast Intent后，所有匹配该Intent的BroadcastReceiver都有可能被启动。<br>
+broadcast分为normal broadcast（普通广播），普通广播所有接收者在同一时刻接收广播，但是无法终止。orded Broadcast（有序广播），有序广播就是广播含有优先级，在android：priority属性中设定，数字越大优先级别越高。取值-1000到1000，接受者可以终止Broadcast Intent的传播。
+2016/7/4看到488页
