@@ -697,6 +697,12 @@ Service组件创建时会调用onCreate()方法，被启动时会调用onStartCo
 IBinder onBind(Intent intent)是service必须实现的方法，该方法返回一个IBinder，应用程序可以通过该组件与service组件通信<br>
 boolean onUnbind(Intent intent)当该Service上绑定的所有客户端都断开连接时将会回调该方法。<br>
 运行service有两种方法：通过context的startService()方法，访问者与service没有关联，即使访问者退出了，service继续运行。<br>
-通过context的bindService()方法，访问者与service绑定在一起，访问者一旦退出，service也就终止。<br>
+通过context的bindService()方法，访问者与service绑定在一起，访问者一旦退出，service也就终止。但是如果组件调用unBindService()取消与该service的绑定时，也只是切断该Activity与Service之间的关联，并不能停止该Service组件。<br>
 如果service需要和访问者之间进行方法调用或者交换数据，应该使用bindService()和unbindService()
 2016/7/3日看到462页
+实现ServiceConnection.你的实现必须重写两个回调方法：onServiceConnected(),系统调用这个来传送在service的onBind()中返回的IBinder．OnServiceDisconnected(),Android系统在同service的连接意外丢失时调用这个．比如当service崩溃了或被强杀了．当客户端解除绑定时，这个方法不会被调用．<br>
+Service的生命周期，非绑定service的生命周期，也就是通过startservice()，过程是onCreate(),onStartCommand(),onDestroy()方法。<br>
+被绑定Service的生命周期，onCreate(),onBind(),onUnbind(),onDestroy()
+####IntentService
+Service与它所在的应用处于同一个进程当中，Service不是一个新的线程，因此不应该在Service中直接处理耗时的任务。如果需要在Service中处理耗时的任务，建议在Service中另外开启一条新线程来处理耗时任务。也可以使用IntentService来实现。<br>
+IntentService会创建单独的worker线程来处理所有的Intent请求。
