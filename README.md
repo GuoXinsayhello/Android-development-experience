@@ -717,4 +717,10 @@ broadcast分为normal broadcast（普通广播），普通广播所有接收者�
 ##第11章 多媒体应用开发
 Android可以控制播放音乐时的均衡器、重低音以及显示音乐波形等。<br>
 如果应用程序经常需要播放密集，短促的音效，用mediaplayer不太合适，因为mediaplayer资源占用量比较高，延迟时间比较长，不支持多个音频同时播放，用SoundPool来播放音效更合适一点，它多用来播放一些比较短的声音片段<br>
-使用VideoView来播放视频，或者使用MediaPlayer和SurfaceView来播放视频，但是后者比较复杂。
+使用VideoView来播放视频，或者使用MediaPlayer和SurfaceView来播放视频，但是后者比较复杂。Android 5.0新增了MediaProjectionManager管理器，该管理器可以方便地实现屏幕捕捉功能。
+##第13章 Android网络应用
+DatagramSocket、DatagramPacket、MulticastSocket是基于UDP协议的网络通信。<br>
+自包含：组件不依赖其他组件，能够以独立的方式供外部使用。<br>
+###基于TCP协议的网络通信
+、首先使用ServerSocket创建TCP服务器端，在建立通信连接之前接收其他通信实体连接请求的类是ServerSocket，ServerSocket对象用于监听来自客户端的Socket连接。如果创建ServerSocket没有指定IP地址，那么该ServerSocket将会绑定到本机默认的IP地址。<br>
+然后使用Socket类来创建客户端。之后通过InputStream getInputStream()返回该Socket对象对应的输入流，OutputStream getOutputStream返回该Socket对象对应的输出流
