@@ -711,5 +711,10 @@ AlarmManager不仅可以定闹钟，而且可以用来定时更换壁纸之类�
 ###BroadcastReceiver
 BroadcastReceiver用于接收程序发出的Broadcast Intent，如果其onReceive()方法没有在10s内执行完成，Android程序会认为该程序没有响应。发出Broadcast Intent后，所有匹配该Intent的BroadcastReceiver都有可能被启动。<br>
 broadcast分为normal broadcast（普通广播），普通广播所有接收者在同一时刻接收广播，但是无法终止，并且不能把处理结果传给下一个接收者。orded Broadcast（有序广播），有序广播就是广播含有优先级，在android：priority属性中设定，数字越大优先级别越高。取值-1000到1000，接受者可以终止Broadcast Intent的传播，并且可以传到下一个接收者。broadcast receiver的应用就是可以收到应用或者系统发出的广播信息，从而做出响应。<br>
-【putExtra("A",B)中，AB为键值对，第一个参数为键名，第二个参数为键对应的值。顺便提一下，如果想取出Intent对象中的这些值，需要在你的另一个Activity中用getXXXXXExtra方法，注意需要使用对应类型的方法，参数为键名】
+【putExtra("A",B)中，AB为键值对，第一个参数为键名，第二个参数为键对应的值。顺便提一下，如果想取出Intent对象中的这些值，需要在你的另一个Activity中用getXXXXXExtra方法，注意需要使用对应类型的方法，参数为键名】<br>
+可以让一个service开机自动运行，具体做法就是让一个Broadcast receiver监听Action为ACTION_BOOT_COMPLETED常量的Intent
 2016/7/4看到488页
+##第11章 多媒体应用开发
+Android可以控制播放音乐时的均衡器、重低音以及显示音乐波形等。<br>
+如果应用程序经常需要播放密集，短促的音效，用mediaplayer不太合适，因为mediaplayer资源占用量比较高，延迟时间比较长，不支持多个音频同时播放，用SoundPool来播放音效更合适一点，它多用来播放一些比较短的声音片段<br>
+使用VideoView来播放视频，或者使用MediaPlayer和SurfaceView来播放视频，但是后者比较复杂。
