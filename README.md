@@ -723,4 +723,5 @@ DatagramSocket、DatagramPacket、MulticastSocket是基于UDP协议的网络通�
 自包含：组件不依赖其他组件，能够以独立的方式供外部使用。<br>
 ###基于TCP协议的网络通信
 、首先使用ServerSocket创建TCP服务器端，在建立通信连接之前接收其他通信实体连接请求的类是ServerSocket，ServerSocket对象用于监听来自客户端的Socket连接。如果创建ServerSocket没有指定IP地址，那么该ServerSocket将会绑定到本机默认的IP地址。<br>
-然后使用Socket类来创建客户端。之后通过InputStream getInputStream()返回该Socket对象对应的输入流，OutputStream getOutputStream返回该Socket对象对应的输出流
+然后使用Socket类来创建客户端。之后通过InputStream getInputStream()返回该Socket对象对应的输入流，OutputStream getOutputStream返回该Socket对象对应的输出流<br>
+服务器应该为每个Socket单独启动一条线程，每条线程负责与一个客户端进行通信。
