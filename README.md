@@ -733,6 +733,17 @@ Get是向服务器发索取数据的一种请求，而Post是向服务器提交�
 Get是获取信息，而不是修改信息，类似数据库查询功能一样，数据不会被修改
 Get请求的参数会跟在url后进行传递，请求的数据会附在URL之后，以?分割URL和传输数据，参数之间以&相连,％XX中的XX为该符号以16进制表示的ASCII，如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密。
 Get传输的数据有大小限制，因为GET是通过URL提交数据，那么GET可提交的数据量就跟URL的长度有直接关系了，不同的浏览器对URL的长度的限制是不同的。
-GET请求的数据会被浏览器缓存起来，用户名和密码将明文出现在URL上，其他人可以查到历史浏览记录，数据不太安全。在服务器端，用Request.QueryString来获取Get方式提交来的数据
-Post请求则作为http消息的实际内容发送给web服务器，数据放置在HTML Header内提交，Post没有限制提交的数据。Post比Get安全，当数据是中文或者不敏感的数据，则用get，因为使用get，参数会显示在地址，对于敏感数据和不是中文字符的数据，则用post
-POST表示可能修改变服务器上的资源的请求，在服务器端，用Post方式提交的数据只能用Request.Form来获取
+GET请求的数据会被浏览器缓存起来，用户名和密码将明文出现在URL上，其他人可以查到历史浏览记录，数据不太安全。在服务器端，用Request.QueryString来获取Get方式提交来的数据<br>
+Post请求则作为http消息的实际内容发送给web服务器，数据放置在HTML<br> Header内提交，Post没有限制提交的数据。Post比Get安全，当数据是中文或者不敏感的数据，则用get，因为使用get，参数会显示在地址，对于敏感数据和不是中文字符的数据，则用post
+POST表示可能修改变服务器上的资源的请求，在服务器端，用Post方式提交的数据只能用Request.Form来获取<br>
+http://blog.csdn.net/yipiankongbai/article/details/24025633 这个网站对于http的get请求与post请求解释比较详细。<br>
+`Session`<br>
+http是无状态的协议，客户每次读取web页面时，服务器都打开新的会话，而且服务器也不会自动维护客户的上下文信息，那么要怎么才能实现会话跟踪呢？session就是一种保存上下文信息的机制，它是针对每一个用户的，变量的值保存在服务器端，通过SessionID来区分不同的客户,session是以cookie或URL重写为基础的，默认使用cookie来实现，系统会创造一个名为JSESSIONID的输出返回给客户端Cookie保存。<br>
+会话（Session）跟踪是Web程序中常用的技术，用来跟踪用户的整个会话。常用的会话跟踪技术是Cookie与Session。Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。<br>
+http://blog.csdn.net/fangaoxin/article/details/6952954/这篇文章详细说了session与cookie的机制<br>
+`HttpClient`是一个增强版的HttpURLConnection，是一个简单的HTTP客户端，可以发送HTTP请求，接收HTTP响应<br>
+可以用WebView做一个简单的浏览器，并且WebView提供了一个配套的WebSetting工具类，该工具类提供了大量的方法来管理WebView的选项设置，并且其中的setJavaScriptEnabled（true）可以让WebView中的JavaScript脚本调用Android方法，也就是webview页面上有一个按钮，点击后会启发Android本身的操作，比如显示一个toast之类的。
+###使用WebService进行网络编程
+Web Service涉及的技术主要有SOAP（Simple Object Access Protocal,简单对象访问协议），WSDL（Web Service Description Language），UDDI（Universal Description，Description and Integration）<br>
+SOAP允许一个应用程序向另外一个应用程序发送xml消息，WSDL语言使用XML描述Web Service，包括访问和使用Web Service所必需的信息，定义该Web Service的位置/功能以及如何通信等描述信息<br>
+Apache CXF是一个开源的，全功能的，容易使用的Web服务框架
