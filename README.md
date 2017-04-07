@@ -746,4 +746,6 @@ http://blog.csdn.net/fangaoxin/article/details/6952954/这篇文章详细说了s
 ###使用WebService进行网络编程
 Web Service涉及的技术主要有SOAP（Simple Object Access Protocal,简单对象访问协议），WSDL（Web Service Description Language），UDDI（Universal Description，Description and Integration）<br>
 SOAP允许一个应用程序向另外一个应用程序发送xml消息，WSDL语言使用XML描述Web Service，包括访问和使用Web Service所必需的信息，定义该Web Service的位置/功能以及如何通信等描述信息<br>
-Apache CXF是一个开源的，全功能的，容易使用的Web服务框架
+Apache CXF是一个开源的，全功能的，容易使用的Web服务框架<br>
+
+android.os.Message是定义一个Messge包含必要的描述和属性数据，并且此对象可以被发送给android.os.Handler处理。属性字段：arg1、arg2、what、obj、replyTo等；其中arg1和arg2是用来存放整型数据的；what是用来保存消息标示的；obj是Object类型的任意对象；replyTo是消息管理器，会关联到一个handler，handler就是处理其中的消息。通常对Message对象不是直接new出来的，只要调用handler中的obtainMessage方法来直接获得Message对象。
